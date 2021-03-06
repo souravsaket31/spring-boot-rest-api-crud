@@ -18,7 +18,7 @@ import com.springboot.restapi.model.Employee;
 import com.springboot.restapi.repository.EmployeeRepository;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class EmployeeController {
 
 	@Autowired
@@ -54,9 +54,9 @@ public class EmployeeController {
 		Employee employee = employeeRepository.findById(empId)
 				.orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + empId));
 
+		employee.setFirstName(employeeDetails.getFirstName());
 		employee.setEmail(employeeDetails.getEmail());
 		employee.setLastName(employeeDetails.getLastName());
-		employee.setFirstName(employeeDetails.getFirstName());
 
 		final Employee updatedEmployee = employeeRepository.save(employee);
 
@@ -69,7 +69,7 @@ public class EmployeeController {
 			throws ResourceNotFoundException {
 		employeeRepository.findById(empId)
 				.orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + empId));
-
+		employeeRepository.deleteById(empId);
 		return ResponseEntity.ok().build();
 	}
 

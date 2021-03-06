@@ -14,10 +14,13 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
 	@Column(name = "first_name")
 	private String firstName;
+	
 	@Column(name = "last_name")
 	private String lastName;
+	
 	@Column(name = "email")
 	private String email;
 	
@@ -26,6 +29,7 @@ public class Employee {
 	public Employee() {
 		super();
 	}
+	
 	public Employee(long id, String firstName, String lastName, String email) {
 		super();
 		this.id = id;
