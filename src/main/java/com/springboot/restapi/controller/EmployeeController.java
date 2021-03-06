@@ -31,7 +31,14 @@ public class EmployeeController {
 	}
 
 	// 2. create employee
-
+	/* JSON Body
+	 * 
+	 {
+    	"firstName" : "Mathew",
+    	"lastName" : "Perry",
+    	"email" : "mperry@gmail.com"    
+	 }
+	 * */
 	@PostMapping("/employees")
 	public Employee createEmployee(@RequestBody Employee employee) {
 		return employeeRepository.save(employee);
