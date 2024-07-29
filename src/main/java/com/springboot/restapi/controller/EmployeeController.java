@@ -96,7 +96,7 @@ public class EmployeeController {
 		return new ResponseEntity<>(employees, HttpStatus.CREATED);
 	}
 
-	@GetMapping("/static/employees")
+	@GetMapping("/templates/employees")
 	public ResponseEntity<List<Employee>> getStaticListOfEmployees() {
 		List<Employee> employees = employeeService.getStaticEmployees();
 		logger.info("Fetching all static list of employees");
