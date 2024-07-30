@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employees</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1>Employee Management</h1>
+
+<form th:action="@{/views/employees}" th:object="${employee}" method="post">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" th:field="*{firstName}" />
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" th:field="*{lastName}" />
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" th:field="*{email}" />
+
+    <button type="submit">Add Employee</button>
+</form>
+
+<!-- Button to fetch the list of employees -->
+<button id="loadEmployeesButton">Get List of Employees</button>
+
+<!-- Section to display employees -->
+<div id="employeeList" style="display: none;">
+    <h2>List of Employees</h2>
+    <table id="employeeTable">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Employee rows will be inserted here dynamically -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('#loadEmployeesButton').on('click', function() {
+            $.ajax({
+                url: '/api/v1/templates/employees',
+                method: 'GET',
+                success: function(data) {
+                    // Populate the table with the data
+                    var tbody = $('#employeeTable tbody');
+                    tbody.empty();
+                    data.forEach(function(employee) {
+                        var row = '<tr>' +
+                            '<td>' + employee.id + '</td>' +
+                            '<td>' + employee.firstName + '</td>' +
+                            '<td>' + employee.lastName + '</td>' +
+                            '<td>' + employee.email + '</td>' +
+                            '</tr>';
+                        tbody.append(row);
+                    });
+                    $('#employeeList').show(); // Show the employee list section
+                },
+                error: function() {
+                    alert('Failed to load employee data.');
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

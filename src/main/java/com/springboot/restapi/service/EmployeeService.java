@@ -10,6 +10,8 @@ import java.util.stream.IntStream;
 @Service
 public class EmployeeService {
 
+
+
     private List<Employee> staticEmployees = new ArrayList<>();
 
     public List<Employee> loadEmployees() {
@@ -21,5 +23,9 @@ public class EmployeeService {
 
     public List<Employee> getStaticEmployees() {
         return staticEmployees;
+    }
+
+    public void saveEmployee(Employee employee) {
+        staticEmployees.add(employee);
     }
 }
