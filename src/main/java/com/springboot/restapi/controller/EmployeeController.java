@@ -103,5 +103,10 @@ public class EmployeeController {
 		return new ResponseEntity<>(employees, HttpStatus.OK);
 	}
 
+	@GetMapping("/count")
+	public long getCountOfEmployees(){
+		long count = employeeService.getStaticEmployees().stream().count();
+		return count;
+	}
 
 }
